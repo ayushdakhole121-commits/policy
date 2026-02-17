@@ -2,16 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Legal Documents</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal Center</title>
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; }
-        a { color: blue; text-decoration: none; margin: 0 10px; font-weight: bold; }
+        :root { --p: #2563eb; --t: #475569; --bg: #f8fafc; }
+        body { font-family: system-ui, sans-serif; background: var(--bg); color: #1e293b; margin: 0; display: flex; justify-content: center; padding: 20px; }
+        .container { background: white; width: 100%; max-width: 700px; padding: 30px; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        .tabs { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 2px solid #e2e8f0; padding-bottom: 15px; }
+        .tab-btn { padding: 10px 20px; border: none; background: none; cursor: pointer; font-weight: 600; color: var(--t); border-radius: 6px; }
+        .tab-btn.active { background: var(--p); color: white; }
+        .content { display: none; line-height: 1.6; }
+        .content.active { display: block; }
+        h1 { color: #0f172a; font-size: 1.5rem; }
+        footer { margin-top: 40px; font-size: 0.8rem; color: #64748b; text-align: center; }
     </style>
 </head>
 <body>
-    <h1>Project Documents</h1>
-    <p>Select a page to view:</p>
-    <a href="/policy">Privacy Policy</a>
-    <a href="/terms">Terms of Service</a>
+
+<div class="container">
+    <div class="tabs">
+        <button class="tab-btn active" onclick="show('policy')">Privacy Policy</button>
+        <button class="tab-btn" onclick="show('terms')">Terms of Service</button>
+    </div>
+
+    <div id="policy" class="content active">
+        <h1>Privacy Policy</h1>
+        <p><em>Last Updated: February 2026</em></p>
+        <p>We value your privacy. We do not sell your data. We only collect basic info to improve our service.</p>
+        <h2>Data Collection</h2>
+        <p>This app may collect basic usage logs and cookies to ensure a smooth experience.</p>
+    </div>
+
+    <div id="terms" class="content">
+        <h1>Terms of Service</h1>
+        <p><em>Last Updated: February 2026</em></p>
+        <p>By using this service, you agree to our rules. Do not use this site for illegal activities.</p>
+        <h2>Limitation of Liability</h2>
+        <p>We are not responsible for any data loss or issues caused by the use of this website.</p>
+    </div>
+
+    <footer>&copy; 2026 Your Name. All Rights Reserved.</footer>
+</div>
+
+<script>
+    function show(id) {
+        document.querySelectorAll('.content, .tab-btn').forEach(el => el.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        event.target.classList.add('active');
+        window.history.pushState(null, null, '/' + id); // Changes URL to /policy or /terms
+    }
+    // Auto-load based on URL
+    if(window.location.pathname === '/terms') show('terms');
+</script>
+
 </body>
 </html>
